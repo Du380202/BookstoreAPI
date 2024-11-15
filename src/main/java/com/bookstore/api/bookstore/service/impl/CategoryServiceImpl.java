@@ -17,9 +17,9 @@ public class CategoryServiceImpl implements CategoryService{
 	private CategoryRepository categoryRepository;
 	
 	@Override
-	public List<Category> findAllById(List<Integer> ids) {
+	public List<Category> findAll() {
 		
-		return categoryRepository.findAllById(ids);
+		return categoryRepository.findAll();
 	}
 
 	@Override
@@ -27,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService{
 		Category category = new Category();
 		category.setCategoryName(categoryDto.getCategoryName());
 		category.setDepscription(categoryDto.getDepscription());
+		category.setCategoryImg(categoryDto.getCategoryImg());
 		return categoryRepository.save(category);
 	}
 
@@ -35,6 +36,7 @@ public class CategoryServiceImpl implements CategoryService{
 		Category category = categoryRepository.findById(categoryDto.getCategoryId()).get();
 		category.setCategoryName(categoryDto.getCategoryName());
 		category.setDepscription(categoryDto.getDepscription());
+		category.setCategoryImg(categoryDto.getCategoryImg());
 		return categoryRepository.save(category);
 	}
 
@@ -42,6 +44,11 @@ public class CategoryServiceImpl implements CategoryService{
 	public void delete(Integer id) {
 		categoryRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Category> findAllByIds(List<Integer> ids) {
+		return categoryRepository.findAllById(ids);
 	}
 
 }

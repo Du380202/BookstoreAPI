@@ -26,6 +26,8 @@ public class Category {
 	private String categoryName;
 	@Column(name = "depscription")
 	private String depscription;
+	@Column(name = "categoryimg")
+	private String categoryImg;
 	
 	@ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
 	private List<Book> books = new ArrayList<>();
@@ -36,8 +38,15 @@ public class Category {
 //	public void setBooks(List<Book> books) {
 //		this.books = books;
 //	}
+	
 	public Integer getCategoryId() {
 		return categoryId;
+	}
+	public String getCategoryImg() {
+		return categoryImg;
+	}
+	public void setCategoryImg(String categoryImg) {
+		this.categoryImg = categoryImg;
 	}
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;

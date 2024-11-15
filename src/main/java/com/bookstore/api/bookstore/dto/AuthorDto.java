@@ -6,6 +6,14 @@ public class AuthorDto {
 	private String authorName;
 
 	private String biography;
+	private String authorImg;
+	public String getAuthorImg() {
+		return authorImg;
+	}
+
+	public void setAuthorImg(String authorImg) {
+		this.authorImg = authorImg;
+	}
 
 	public Integer getAuthorId() {
 		return authorId;

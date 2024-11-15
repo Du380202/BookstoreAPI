@@ -13,4 +13,6 @@ public interface BookService {
 	public void deleteBook(Integer ids);
 
 	public Book updateBook(BookDto bookDto);
+	
+	public List<Book> searchBook(String key);
 }

@@ -6,7 +6,9 @@ import com.bookstore.api.bookstore.dto.CategoryDto;
 import com.bookstore.api.bookstore.entity.Category;
 
 public interface CategoryService {
-	public List<Category> findAllById(List<Integer> ids);
+	public List<Category> findAll();
+	
+	public List<Category> findAllByIds(List<Integer> ids);
 	
 	public Category create(CategoryDto categoryDto);
 	

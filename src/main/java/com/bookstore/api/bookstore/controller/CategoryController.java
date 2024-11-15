@@ -23,8 +23,8 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	@GetMapping(value ="api/category")
-	public List<Category> getAll(@RequestParam List<Integer> ids) {
-		return categoryService.findAllById(ids);
+	public List<Category> getAll() {
+		return categoryService.findAll();
 	}
 	
 	@PostMapping(value = "api/category")

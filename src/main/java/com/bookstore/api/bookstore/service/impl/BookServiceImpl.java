@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book createNewBook(BookDto bookDto) {
 		Book newBook = new Book();
-		List<Category> categories = categoryService.findAllById(bookDto.getCategoryIds());
+		List<Category> categories = categoryService.findAllByIds(bookDto.getCategoryIds());
 		newBook.setBookName(bookDto.getBookName());
 		newBook.setDescription(bookDto.getDescription());
 		newBook.setImage(bookDto.getImage());
@@ -72,6 +72,12 @@ public class BookServiceImpl implements BookService {
 	public void deleteBook(Integer ids) {
 		bookRepository.deleteById(ids);
 
+	}
+
+	@Override
+	public List<Book> searchBook(String key) {
+		// TODO Auto-generated method stub
+		return bookRepository.searchBook(key);
 	}
 
 }

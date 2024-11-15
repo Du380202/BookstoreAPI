@@ -24,6 +24,7 @@ public class AuthorsServiceImpl implements AuthorService {
 		Author author = new Author();
 		author.setAuthorName(authorDto.getAuthorName());
 		author.setBiography(authorDto.getBiography());
+		author.setAuthorImg(authorDto.getAuthorImg());
 		return authorRepository.save(author);
 	}
 	
@@ -32,6 +33,7 @@ public class AuthorsServiceImpl implements AuthorService {
 		Author author = authorRepository.findById(authorDto.getAuthorId()).get();
 		author.setAuthorName(authorDto.getAuthorName());
 		author.setBiography(authorDto.getBiography());
+		author.setAuthorImg(authorDto.getAuthorImg());
 		return authorRepository.save(author);
 	}
 	

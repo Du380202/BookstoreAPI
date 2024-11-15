@@ -28,6 +28,17 @@ public class Author {
 	
 	@Column(name = "biography", columnDefinition = "TEXT")
 	private String biography;
+	
+	@Column(name = "authorimg")
+	private String authorImg;
+
+	public String getAuthorImg() {
+		return authorImg;
+	}
+
+	public void setAuthorImg(String authorImg) {
+		this.authorImg = authorImg;
+	}
 
 	@ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
 	private List<Book> bookList = new ArrayList<>();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookstore.api.bookstore.dto.CartDto;
@@ -18,12 +19,18 @@ public class CartController {
 	private CartService cartService;
 	
 	@GetMapping(value = "api/cart")
-	public Cart getByCart() {
-		return cartService.findAllById(1,1);
+	public List<Cart> getCartByUser(@RequestParam("userId") Integer userId) {
+		return cartService.findAllByUser(userId);  
 	}
 	
-	@PostMapping("api/cart")
-	public Cart postData(@RequestBody CartDto cartDto) {
-		return cartService.addCart(cartDto);
+	@PostMapping("api/cart/add")
+	public Cart postData(@RequestParam("bookId") Integer bookId, 
+			@RequestParam("userId") Integer userId) {
+		return cartService.addNewCart(bookId, userId);
+	}
+	
+	@PostMapping("api/cart/remove")
+	public void removeCart(@RequestParam("cartId") Integer cartId) {
+		cartService.removeCart(cartId);
 	}
  }

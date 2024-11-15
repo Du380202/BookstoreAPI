@@ -15,5 +15,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 //	List<Cart> findByBookIdAndUserId(Integer bookId, Integer userId);
 	@Query("SELECT c FROM Cart c WHERE c.book.bookId = :bookId AND c.user.userId = :userId")
     Cart findByBookIdAndUserId(@Param("bookId") Integer bookId, @Param("userId") Integer userId);
+	
+	@Query("SELECT c FROM Cart c WHERE c.user.userId = :userId")
+    List<Cart> findAllCartByUserId(@Param("userId") Integer userId);
 
 }

@@ -47,15 +47,15 @@ public class Cart {
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-//	public Book getBook() {
-//		return book;
-//	}
+	public Book getBook() {
+		return book;
+	}
 	public void setBook(Book book) {
 		this.book = book;
 	}
-//	public User getUser() {
-//		return user;
-//	}
+	public User getUser() {
+		return user;
+	}
 	public void setUser(User user) {
 		this.user = user;
 	}

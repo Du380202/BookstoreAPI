@@ -1,6 +1,7 @@
 package com.bookstore.api.bookstore.service.impl;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,20 @@ public class CartServiceImpl implements CartService {
 	private UserRepository userRepository;
 	
 	@Override
-	public Cart addCart(CartDto cartDto) {
-		Cart cart = cartRepository.findByBookIdAndUserId(cartDto.getBookid(), cartDto.getUserid());
+	public Cart addNewCart(Integer bookId, Integer userId) {
+		Cart cart = cartRepository.findByBookIdAndUserId(bookId, userId);
+		Book book = bookRepository.findById(bookId).get(); 
+		User user = userRepository.findById(userId).get();
 		if(cart != null) {
 			int quantity = cart.getQuantity() + 1;
 			cart.setQuantity(quantity);
+			BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(quantity));
+			cart.setTotalPrice(totalPrice);
 		}
 		else {
 			cart = new Cart();
-			Book book = bookRepository.findById(cartDto.getBookid()).get(); 
-			User user = userRepository.findById(cartDto.getUserid()).get();
-			BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(cartDto.getQuantity()));
-			cart.setQuantity(cartDto.getQuantity());
-			cart.setTotalPrice(totalPrice);
+			cart.setQuantity(1);
+			cart.setTotalPrice(book.getPrice());
 			cart.setBook(book);
 			cart.setUser(user);
 			
@@ -50,6 +52,29 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart findAllById(Integer bookId, Integer userId) {
 		return cartRepository.findByBookIdAndUserId(bookId, userId);
+	}
+
+	@Override
+	public void removeCart(Integer cartId) {
+		Cart cart = cartRepository.findById(cartId).get();
+		if (cart.getQuantity() == 1) {
+			cartRepository.delete(cart);
+		}
+		else {
+			int quantity = cart.getQuantity();
+			BigDecimal price = cart.getTotalPrice().divide(BigDecimal.valueOf(quantity), 2, RoundingMode.HALF_UP);
+			quantity = quantity - 1;
+			cart.setQuantity(quantity);
+			BigDecimal totalPrice = cart.getTotalPrice().subtract(price);
+			cart.setTotalPrice(totalPrice);
+			cartRepository.save(cart);
+		}
+	}
+
+	@Override
+	public List<Cart> findAllByUser(Integer userId) {
+		
+		return cartRepository.findAllCartByUserId(userId);
 	}
 
 }

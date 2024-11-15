@@ -84,9 +84,9 @@ public class Book {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Cart> cart = new ArrayList<>();
     
-	public List<Cart> getCart() {
-		return cart;
-	}
+//	public List<Cart> getCart() {
+//		return cart;
+//	}
 
 	public String getImage() {
 		return image;
@@ -100,13 +100,13 @@ public class Book {
 		this.cart = cart;
 	}
 
-	public List<Discount> getDiscounts() {
-		return discounts;
-	}
+//	public List<Discount> getDiscounts() {
+//		return discounts;
+//	}
 
-	public List<Rate> getRates() {
-		return rates;
-	}
+//	public List<Rate> getRates() {
+//		return rates;
+//	}
 
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
@@ -116,25 +116,25 @@ public class Book {
 		this.discounts = discounts;
 	}
 
-	public List<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
+//	public List<OrderDetail> getOrderDetails() {
+//		return orderDetails;
+//	}
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
-	public List<Author> getAuthors() {
-		return authors;
-	}
+//	public List<Author> getAuthors() {
+//		return authors;
+//	}
 
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
 
-	public List<Category> getCategories() {
-		return categories;
-	}
+//	public List<Category> getCategories() {
+//		return categories;
+//	}
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;

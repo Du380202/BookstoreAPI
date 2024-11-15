@@ -6,7 +6,11 @@ import com.bookstore.api.bookstore.dto.CartDto;
 import com.bookstore.api.bookstore.entity.Cart;
 
 public interface CartService {
-	public Cart addCart(CartDto cartDto) ;
+	public Cart addNewCart(Integer bookId, Integer userId) ;
 	
 	public Cart findAllById(Integer bookId, Integer userId);
+	
+	public void removeCart(Integer cartId);
+	
+	public List<Cart> findAllByUser(Integer userId);
 }

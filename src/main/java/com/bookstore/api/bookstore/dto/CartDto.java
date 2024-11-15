@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class CartDto {
 	private Integer cartId;
 	private Integer quantity;
-	private BigDecimal totalPrice;
+	private BigDecimal price;
     private Integer bookid;
     private Integer userid;
 	public Integer getCartId() {
@@ -27,11 +27,11 @@ public class CartDto {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
+	public BigDecimal getPrice() {
+		return price;
 	}
-	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setPrice(BigDecimal totalPrice) {
+		this.price = totalPrice;
 	}
 	public Integer getBookid() {
 		return bookid;

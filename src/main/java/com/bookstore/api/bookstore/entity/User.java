@@ -48,21 +48,21 @@ public class User {
     @JoinColumn(name = "roleid")
     private Role role;
 	
-	public List<Address> getAddressList() {
-		return addressList;
-	}
+//	public List<Address> getAddressList() {
+//		return addressList;
+//	}
 	public void setAddressList(List<Address> addressList) {
 		this.addressList = addressList;
 	}
-	public List<Rate> getRates() {
-		return rates;
-	}
+//	public List<Rate> getRates() {
+//		return rates;
+//	}
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
 	}
-	public List<Cart> getCart() {
-		return cart;
-	}
+//	public List<Cart> getCart() {
+//		return cart;
+//	}
 	public void setCart(List<Cart> cart) {
 		this.cart = cart;
 	}

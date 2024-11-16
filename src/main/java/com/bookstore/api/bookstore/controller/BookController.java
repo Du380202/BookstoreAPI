@@ -26,8 +26,6 @@ import com.bookstore.api.bookstore.service.UploadService;
 public class BookController {
 	@Autowired
 	private BookService bookService;
-	
-	
 
 	@GetMapping(value = "/api/book")
 	public List<Book> getBooks() {

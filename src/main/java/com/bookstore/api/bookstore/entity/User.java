@@ -3,6 +3,8 @@ package com.bookstore.api.bookstore.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,16 +36,27 @@ public class User {
 	@Column(name = "status")
 	private Integer status;
 	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	@Column(name = "phonenumber")
+	private String phoneNumber;
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Address> addressList = new ArrayList<>();
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Rate> rates = new ArrayList<>();
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Cart> cart = new ArrayList<>();
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Order> order = new ArrayList<>();
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "roleid")
     private Role role;
@@ -107,6 +120,12 @@ public class User {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

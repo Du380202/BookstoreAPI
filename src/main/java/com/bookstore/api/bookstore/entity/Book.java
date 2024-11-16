@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,36 +60,40 @@ public class Book {
 
     @Column(name = "rating")
     private Float rating;
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	private List<OrderDetail> orderDetails = new ArrayList<>();
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "publisherid", nullable = false)
     private Publisher publisher;
-    
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "categorydetail",
 			joinColumns = @JoinColumn(name = "bookid", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "categoryid", nullable = false))
 	private List<Category> categories = new ArrayList<>();
-
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "authordetail",
 			joinColumns = @JoinColumn(name = "bookid", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "authorid", nullable = false))
     private List<Author> authors = new ArrayList<>();
-    
+    @JsonIgnore
     @ManyToMany(mappedBy = "books")
     private List<Discount> discounts = new ArrayList<>();
     
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Rate> rates = new ArrayList<>();
     
+    @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Cart> cart = new ArrayList<>();
     
-//	public List<Cart> getCart() {
-//		return cart;
-//	}
+	public List<Cart> getCart() {
+		return cart;
+	}
 
 	public String getImage() {
 		return image;
@@ -100,13 +107,13 @@ public class Book {
 		this.cart = cart;
 	}
 
-//	public List<Discount> getDiscounts() {
-//		return discounts;
-//	}
+	public List<Discount> getDiscounts() {
+		return discounts;
+	}
 
-//	public List<Rate> getRates() {
-//		return rates;
-//	}
+	public List<Rate> getRates() {
+		return rates;
+	}
 
 	public void setRates(List<Rate> rates) {
 		this.rates = rates;
@@ -116,9 +123,9 @@ public class Book {
 		this.discounts = discounts;
 	}
 
-//	public List<OrderDetail> getOrderDetails() {
-//		return orderDetails;
-//	}
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;

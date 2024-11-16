@@ -1,15 +1,34 @@
 package com.bookstore.api.bookstore.dto;
 
-import jakarta.persistence.Column;
-
 public class UserDto {
 	private Integer userId;
 	private String username;
 	private String password;
+	private String retryPassword;
 	private String email;
 	private String address;
 	private String fullName;
 	private Integer status;
+	private Integer roleId;
+	private String phoneNumber;
+	public String getRetryPassword() {
+		return retryPassword;
+	}
+	public void setRetryPassword(String retryPassword) {
+		this.retryPassword = retryPassword;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

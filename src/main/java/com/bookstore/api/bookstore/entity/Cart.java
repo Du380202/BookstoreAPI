@@ -2,6 +2,8 @@ package com.bookstore.api.bookstore.entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,10 +24,11 @@ public class Cart {
 	private Integer quantity;
 	@Column(name = "totalprice")
 	private BigDecimal totalPrice;
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "bookid")
     private Book book;
-	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "userid")
     private User user;

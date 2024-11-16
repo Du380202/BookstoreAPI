@@ -42,8 +42,6 @@ public class CartServiceImpl implements CartService {
 			cart.setTotalPrice(book.getPrice());
 			cart.setBook(book);
 			cart.setUser(user);
-			
-			
 		}
 		return cartRepository.save(cart);
 		

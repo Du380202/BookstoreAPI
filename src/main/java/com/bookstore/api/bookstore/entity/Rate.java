@@ -2,6 +2,8 @@ package com.bookstore.api.bookstore.entity;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +26,11 @@ public class Rate {
 	private Integer start;
 	@Column(name = "date")
 	private LocalDate date;
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "userid")
     private User user;
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "bookid")
     private Book book;
@@ -53,6 +57,18 @@ public class Rate {
 	}
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	
 }

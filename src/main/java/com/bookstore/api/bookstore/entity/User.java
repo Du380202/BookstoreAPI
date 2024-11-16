@@ -56,7 +56,6 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Order> order = new ArrayList<>();
-	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "roleid")
     private Role role;

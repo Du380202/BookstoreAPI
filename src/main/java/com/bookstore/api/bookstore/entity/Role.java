@@ -3,6 +3,8 @@ package com.bookstore.api.bookstore.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,6 +23,7 @@ public class Role {
 	private Integer roleId;
 	@Column(name = "rolenamem")
 	private String roleName;
+	@JsonIgnore
 	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
 	private List<User> users = new ArrayList<>();
 	public Integer getRoleId() {

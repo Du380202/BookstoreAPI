@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,7 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
-@Table(name = "'Order'")
+@Table(name = "orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +36,13 @@ public class Order {
 	private String fullName;
 	@Column(name = "status")
 	private Integer status;
+	@Column(name = "token")
+	private String token;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
 	private List<OrderDetail> orderDetails = new ArrayList<>();
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "userid")
     private User user;
@@ -102,6 +108,22 @@ public class Order {
 
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

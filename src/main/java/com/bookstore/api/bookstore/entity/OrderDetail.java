@@ -1,5 +1,7 @@
 package com.bookstore.api.bookstore.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ public class OrderDetail {
 	@Column(name = "quantity")
 	private Integer quantity;
 	@Column(name = "totalprice")
-	private String totalPrice;
+	private BigDecimal totalPrice;
 	
 	@ManyToOne
     @JoinColumn(name = "book")
@@ -40,11 +42,23 @@ public class OrderDetail {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public String getTotalPrice() {
+	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 	
 

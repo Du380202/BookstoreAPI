@@ -13,4 +13,6 @@ public interface CartService {
 	public void removeCart(Integer cartId);
 	
 	public List<Cart> findAllByUser(Integer userId);
+	
+	public void deleteById(Integer cartId);
 }

@@ -75,4 +75,10 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.findAllCartByUserId(userId);
 	}
 
+	@Override
+	public void deleteById(Integer cartId) {
+		cartRepository.deleteById(cartId);
+		
+	}
+
 }

@@ -3,6 +3,7 @@ package com.bookstore.api.bookstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,5 +45,23 @@ public class OrderController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); 
 		}
 		
+	}
+	
+	@GetMapping(value = "api/order/status")
+	public ResponseEntity<?> findAllByStatus(@RequestParam Integer status) {
+		try {
+			return ResponseEntity.ok(orService.findAllByStatus(status));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); 
+		}
+	}
+	
+	@GetMapping(value = "api/order")
+	public ResponseEntity<?> findAllByUser(@RequestParam Integer userId) {
+		try {
+			return ResponseEntity.ok(orService.findAllByUserId(userId));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); 
+		}
 	}
 }

@@ -36,6 +36,18 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderRepository.findAll();
 	}
+	
+	@Override
+	public List<Order> findAllByStatus(Integer status) {
+		// TODO Auto-generated method stub
+		return orderRepository.findAllByStatus(status);
+	}
+	@Override
+	public List<Order> findAllByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return orderRepository.findAllByUser_UserId(userId);
+	}
+	
 	@Override
 	public Order createOrder(OrderDto orderDto) throws Exception {
 		Order order = new Order();
@@ -88,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 	}
+	
 	
 	
 	

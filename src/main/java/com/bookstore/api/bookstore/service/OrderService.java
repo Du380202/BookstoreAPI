@@ -9,6 +9,10 @@ public interface OrderService {
 	
 	public List<Order> findAll();
 	
+	public List<Order> findAllByStatus(Integer status);
+	
+	public List<Order> findAllByUserId(Integer userId);
+	
 	public Order createOrder(OrderDto orderDto) throws Exception;
 	
 	public Order updateStatus(Integer orderId, Integer statusNumber);

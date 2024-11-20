@@ -17,5 +17,7 @@ public interface OrderService {
 	
 	public Order updateStatus(Integer orderId, Integer statusNumber);
 	
+	public Order updateToken(Integer orderId, String token);
+	
 	public Order cancelOrder(Integer orderId) throws Exception;
 }

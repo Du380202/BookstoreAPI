@@ -47,6 +47,16 @@ public class OrderController {
 		
 	}
 	
+	@PostMapping(value = "api/order/token")
+	public ResponseEntity<?> updateToken(@RequestParam Integer orderId, @RequestParam String statusNumber) {
+		try {
+			return ResponseEntity.ok(orService.updateToken(orderId, statusNumber));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); 
+		}
+		
+	}
+	
 	@GetMapping(value = "api/order/status")
 	public ResponseEntity<?> findAllByStatus(@RequestParam Integer status) {
 		try {

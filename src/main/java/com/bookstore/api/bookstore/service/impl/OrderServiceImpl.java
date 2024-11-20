@@ -58,9 +58,9 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderDate(orderDto.getOrderDate());
 		order.setStatus(orderDto.getStatus());
 		order.setUser(user);
-		if (!orderDto.getToken().isEmpty()) {
-			order.setToken(orderDto.getToken());
-		}
+//		if (orderDto.getToken().isEmpty()) {
+//			order.setToken(orderDto.getToken());
+//		}
 		
 		List<Cart> carts = cartService.findAllByUser(orderDto.getUserId());
 		if (!carts.isEmpty()) {
@@ -99,6 +99,13 @@ public class OrderServiceImpl implements OrderService {
 			throw new Exception("Do not cancel this order because it is shipping");
 		}
 		
+	}
+
+	@Override
+	public Order updateToken(Integer orderId, String token) {
+		Order order = orderRepository.findById(orderId).get();
+		order.setToken(token);
+		return orderRepository.save(order);
 	}
 	
 	

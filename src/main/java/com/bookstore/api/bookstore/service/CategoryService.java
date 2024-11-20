@@ -14,5 +14,5 @@ public interface CategoryService {
 	
 	public Category update(CategoryDto categoryDto);
 	
-	public void delete(Integer id);
+	public String delete(Integer id) throws Exception;
 }

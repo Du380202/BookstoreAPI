@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class CategoryController {
 	
 	@PostMapping(value = "api/category")
 	public ResponseEntity<?> uploadImage(@RequestPart("image") MultipartFile imgFile, @RequestPart CategoryDto categoryDto) throws IOException {
-		String imageUrl = uploadService.uploadToCloudinary(imgFile);
+		String imageUrl = uploadService.uploadToCloudinary(imgFile, "category");
 		categoryDto.setCategoryImg(imageUrl);
 		return ResponseEntity.ok(categoryService.create(categoryDto));
 	}
@@ -48,8 +49,13 @@ public class CategoryController {
 	}
 	
 	@DeleteMapping(value = "api/category/{id}")
-	public void delete(@PathVariable Integer id) {
-		categoryService.delete(id);
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
+		try {
+			return ResponseEntity.ok(categoryService.delete(id)) ;
+		}
+		catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 }

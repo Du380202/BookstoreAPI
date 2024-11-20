@@ -21,11 +21,11 @@ public class UploadService {
         ));
     }
 
-    public String uploadToCloudinary(MultipartFile image) throws IOException {
+    public String uploadToCloudinary(MultipartFile image, String fordel) throws IOException {
     	Map uploadResult = cloudinary.uploader().upload(image.getBytes(),
                 ObjectUtils.asMap(
                     "resource_type", "auto",
-                    "folder", "book"
+                    "folder", fordel
                 ));
         return uploadResult.get("url").toString();
     }

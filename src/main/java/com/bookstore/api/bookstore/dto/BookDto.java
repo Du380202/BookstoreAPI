@@ -1,6 +1,7 @@
 package com.bookstore.api.bookstore.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookDto {
@@ -11,13 +12,32 @@ public class BookDto {
     private int quantity;
     private String image;
     private int publicationYear;
+    private LocalDate daySaleDate;
     private int status;
     private int publisherId;
     private float rating;
     
-    private List<Integer> categoryIds;
+    public LocalDate getDaySaleDate() {
+		return daySaleDate;
+	}
 
-    public List<Integer> getCategoryIds() {
+	public void setDaySaleDate(LocalDate daySaleDate) {
+		this.daySaleDate = daySaleDate;
+	}
+
+	private List<Integer> categoryIds;
+    
+    private List<Integer> authorId;
+
+    public List<Integer> getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(List<Integer> authorId) {
+		this.authorId = authorId;
+	}
+
+	public List<Integer> getCategoryIds() {
 		return categoryIds;
 	}
 

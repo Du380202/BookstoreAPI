@@ -21,18 +21,18 @@ import com.cloudinary.utils.ObjectUtils;
 
 @RestController
 public class UploadCotroller {
-	@Autowired
-	private UploadService uploadService;
-	
-	@Autowired
-	private CategoryService categoryService;
-	
-	@PostMapping(value = "api/upload")
-	public ResponseEntity<?> uploadImage(@RequestPart("image") MultipartFile imgFile, @RequestPart CategoryDto categoryDto) throws IOException {
-		String imageUrl = uploadService.uploadToCloudinary(imgFile);
-		categoryDto.setCategoryImg(imageUrl);
-		return ResponseEntity.ok(categoryService.create(categoryDto));
-	}
+//	@Autowired
+//	private UploadService uploadService;
+//	
+//	@Autowired
+//	private CategoryService categoryService;
+//	
+//	@PostMapping(value = "api/upload")
+//	public ResponseEntity<?> uploadImage(@RequestPart("image") MultipartFile imgFile, @RequestPart CategoryDto categoryDto) throws IOException {
+//		String imageUrl = uploadService.uploadToCloudinary(imgFile);
+//		categoryDto.setCategoryImg(imageUrl);
+//		return ResponseEntity.ok(categoryService.create(categoryDto));
+//	}
 	
 //	@PostMapping(value = "api/upload")
 //	public String uploadImage(@RequestPart("image") MultipartFile imgFile) throws IOException {

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 		if (userRepository.existsByUsername(userName)) {
 			throw new DataIntegrityViolationException("Username allready exists");
 		}
-		Role role = roleRepository.findById(userDto.getRoleId()).get();
+		Role role = roleRepository.findById(2).get();
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 		String password = passwordEncoder.encode(userDto.getPassword());
 		User user = new User();

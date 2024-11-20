@@ -1,6 +1,7 @@
 package com.bookstore.api.bookstore.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,9 @@ public class Book {
 
     @Column(name = "status")
     private Integer status;
-
+    
+    @Column(name = "dateSale")
+    private LocalDate daySaleDate;
 
     @Column(name = "rating")
     private Float rating;
@@ -97,6 +100,14 @@ public class Book {
 
 	public String getImage() {
 		return image;
+	}
+
+	public LocalDate getDaySaleDate() {
+		return daySaleDate;
+	}
+
+	public void setDaySaleDate(LocalDate daySaleDate) {
+		this.daySaleDate = daySaleDate;
 	}
 
 	public void setImage(String image) {

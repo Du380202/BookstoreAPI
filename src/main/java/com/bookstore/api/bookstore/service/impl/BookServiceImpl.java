@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.bookstore.api.bookstore.dto.BookDto;
+import com.bookstore.api.bookstore.entity.Author;
 import com.bookstore.api.bookstore.entity.Book;
 import com.bookstore.api.bookstore.entity.Category;
 import com.bookstore.api.bookstore.entity.Publisher;
+import com.bookstore.api.bookstore.repository.AuthorRepository;
 import com.bookstore.api.bookstore.repository.BookRepository;
 import com.bookstore.api.bookstore.service.BookService;
 import com.bookstore.api.bookstore.service.CategoryService;
@@ -26,6 +28,9 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private AuthorRepository authorRepository;
+	
 	
 	@Override
 	public List<Book> findAll() {
@@ -36,10 +41,12 @@ public class BookServiceImpl implements BookService {
 	public Book createNewBook(BookDto bookDto) {
 		Book newBook = new Book();
 		List<Category> categories = categoryService.findAllByIds(bookDto.getCategoryIds());
+		List<Author> authors = authorRepository.findAllById(bookDto.getAuthorId());
 		newBook.setBookName(bookDto.getBookName());
 		newBook.setDescription(bookDto.getDescription());
 		newBook.setImage(bookDto.getImage());
 		newBook.setPrice(bookDto.getPrice());
+		newBook.setDaySaleDate(bookDto.getDaySaleDate());
 		newBook.setQuantity(bookDto.getQuantity());
 		newBook.setStatus(bookDto.getStatus());
 		newBook.setRating(bookDto.getRating());
@@ -47,6 +54,7 @@ public class BookServiceImpl implements BookService {
 		Publisher publi = publisherService.findById(bookDto.getPublisherId());
 		newBook.setPublisher(publi);
 		newBook.setCategories(categories);
+		newBook.setAuthors(authors);
 		Book book = bookRepository.save(newBook);
 		return book;
 	}

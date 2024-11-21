@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.api.bookstore.dto.CartDto;
@@ -26,15 +27,22 @@ public class CartServiceImpl implements CartService {
 	private UserRepository userRepository;
 	
 	@Override
-	public Cart addNewCart(Integer bookId, Integer userId) {
+	public Cart addNewCart(Integer bookId, Integer userId) throws Exception {
 		Cart cart = cartRepository.findByBookIdAndUserId(bookId, userId);
 		Book book = bookRepository.findById(bookId).get(); 
 		User user = userRepository.findById(userId).get();
 		if(cart != null) {
 			int quantity = cart.getQuantity() + 1;
-			cart.setQuantity(quantity);
-			BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(quantity));
-			cart.setTotalPrice(totalPrice);
+			if(quantity <= book.getQuantity()) {
+				cart.setQuantity(quantity);
+				BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(quantity));
+				cart.setTotalPrice(totalPrice);
+			}
+			else {
+				throw new DataIntegrityViolationException("Quantity is limited");
+			}
+			
+			
 		}
 		else {
 			cart = new Cart();

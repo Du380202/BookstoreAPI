@@ -66,17 +66,17 @@ public class Book {
     @JsonIgnore
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	private List<OrderDetail> orderDetails = new ArrayList<>();
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "publisherid", nullable = false)
     private Publisher publisher;
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "categorydetail",
 			joinColumns = @JoinColumn(name = "bookid", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "categoryid", nullable = false))
 	private List<Category> categories = new ArrayList<>();
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "authordetail",
 			joinColumns = @JoinColumn(name = "bookid", nullable = false),
@@ -142,17 +142,17 @@ public class Book {
 		this.orderDetails = orderDetails;
 	}
 
-//	public List<Author> getAuthors() {
-//		return authors;
-//	}
+	public List<Author> getAuthors() {
+		return authors;
+	}
 
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
 	}
 
-//	public List<Category> getCategories() {
-//		return categories;
-//	}
+	public List<Category> getCategories() {
+		return categories;
+	}
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;

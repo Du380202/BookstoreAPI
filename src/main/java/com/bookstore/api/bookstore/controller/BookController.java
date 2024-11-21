@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,14 +54,21 @@ public class BookController {
 	
 	
 	@PutMapping(value = "/api/book")
-	public Book updateBook(@RequestBody BookDto bookDto) {
-		Book b = bookService.createNewBook(bookDto);
-		return b;
+	public ResponseEntity<?> updateBook(@RequestPart("image") MultipartFile imgFile, @RequestPart BookDto bookDto) throws IOException {
+		String imageUrl = uploadService.uploadToCloudinary(imgFile, "book");
+		bookDto.setImage(imageUrl);
+		return ResponseEntity.ok(bookService.updateBook(bookDto));
 	}
 
 	@DeleteMapping(value = "/api/book/{ids}")
-	public void deleteBook(@PathVariable Integer ids) {
-		bookService.deleteBook(ids);
+	public ResponseEntity<?> deleteBook(@PathVariable Integer ids)  throws Exception {
+		try {
+			return ResponseEntity.ok(bookService.delete(ids)) ;
+		}
+		catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+		
 	}
 
 }

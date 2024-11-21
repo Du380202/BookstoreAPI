@@ -3,6 +3,7 @@ package com.bookstore.api.bookstore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.api.bookstore.dto.AuthorDto;
@@ -38,8 +39,13 @@ public class AuthorsServiceImpl implements AuthorService {
 	}
 	
 	@Override
-	public void deleteAuthor(Integer ids) {
-		authorRepository.deleteById(ids);
+	public String deleteAuthor(Integer ids) throws Exception {
+		try {
+			authorRepository.deleteById(ids);
+			return "Xóa thành công";
+		} catch (Exception e) {
+			throw new DataIntegrityViolationException("Vi pham rang buoc khoa ngoai");
+		}
 		
 	}
 	@Override

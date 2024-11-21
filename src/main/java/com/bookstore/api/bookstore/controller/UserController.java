@@ -37,7 +37,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value = "api/login")
+	@PostMapping(value = "api/login")
 	public ResponseEntity<?> login(@RequestBody LoginDto loginDto) throws Exception {
 		try {
 			return ResponseEntity.ok(userService.login(loginDto)) ;

@@ -3,6 +3,7 @@ package com.bookstore.api.bookstore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
@@ -76,16 +77,33 @@ public class BookServiceImpl implements BookService {
 		return book;
 	}
 
+	
 	@Override
-	public void deleteBook(Integer ids) {
-		bookRepository.deleteById(ids);
-
+	public String delete(Integer ids) throws Exception {	
+		try {
+			bookRepository.deleteById(ids);
+			return "Xóa thành công";
+		} catch (Exception e) {
+			throw new DataIntegrityViolationException("Vi pham rang buoc khoa ngoai");
+		}
+		
+		
 	}
 
 	@Override
 	public List<Book> searchBook(String key) {
-		// TODO Auto-generated method stub
 		return bookRepository.searchBook(key);
+	}
+
+	@Override
+	public void updateQuantity(Integer bookId, Integer quantity) {
+		Book book = bookRepository.findById(bookId).get();
+		int currentQuantity = book.getQuantity();
+		currentQuantity = currentQuantity - quantity;
+		System.out.print(currentQuantity);
+		book.setQuantity(currentQuantity);
+		bookRepository.save(book);
+		
 	}
 
 }

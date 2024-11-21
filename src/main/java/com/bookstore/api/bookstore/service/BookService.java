@@ -10,9 +10,11 @@ public interface BookService {
 
 	public Book createNewBook(BookDto bookDto);
 	
-	public void deleteBook(Integer ids);
+	public String delete(Integer ids) throws Exception;
 
 	public Book updateBook(BookDto bookDto);
+	
+	public void updateQuantity(Integer bookId,Integer quantity);
 	
 	public List<Book> searchBook(String key);
 }

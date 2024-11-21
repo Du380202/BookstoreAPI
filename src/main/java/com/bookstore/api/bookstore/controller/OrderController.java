@@ -66,6 +66,15 @@ public class OrderController {
 		}
 	}
 	
+	@GetMapping(value = "api/order/all")
+	public ResponseEntity<?> findAll() {
+		try {
+			return ResponseEntity.ok(orService.findAll());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); 
+		}
+	}
+	
 	@GetMapping(value = "api/order")
 	public ResponseEntity<?> findAllByUser(@RequestParam Integer userId) {
 		try {

@@ -14,6 +14,6 @@ public interface AuthorService {
 	
 	public Author update(AuthorDto authorDto);
 	
-	public void deleteAuthor(Integer ids);
+	public String deleteAuthor(Integer ids) throws Exception;
 	
 }

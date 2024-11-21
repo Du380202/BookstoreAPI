@@ -24,38 +24,41 @@ import com.bookstore.api.bookstore.service.UploadService;
 
 @RestController
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@Autowired
 	private UploadService uploadService;
-	
-	@GetMapping(value ="api/category")
+
+	@GetMapping(value = "api/category")
 	public List<Category> getAll() {
 		return categoryService.findAll();
 	}
-	
+
 	@PostMapping(value = "api/category")
-	public ResponseEntity<?> uploadImage(@RequestPart("image") MultipartFile imgFile, @RequestPart CategoryDto categoryDto) throws IOException {
+	public ResponseEntity<?> uploadImage(@RequestPart("image") MultipartFile imgFile,
+			@RequestPart CategoryDto categoryDto) throws IOException {
 		String imageUrl = uploadService.uploadToCloudinary(imgFile, "category");
 		categoryDto.setCategoryImg(imageUrl);
 		return ResponseEntity.ok(categoryService.create(categoryDto));
 	}
-	
+
 	@PutMapping(value = "api/category")
-	public Category putData(@RequestBody CategoryDto categoryDto) {
-		return categoryService.update(categoryDto);
+	public ResponseEntity<?> putData(@RequestPart("image") MultipartFile imgFile,
+			@RequestPart CategoryDto categoryDto) throws IOException {
+		String imageUrl = uploadService.uploadToCloudinary(imgFile, "category");
+		categoryDto.setCategoryImg(imageUrl);
+		return ResponseEntity.ok(categoryService.update(categoryDto));
 	}
-	
+
 	@DeleteMapping(value = "api/category/{id}")
-	public ResponseEntity<?> delete(@PathVariable Integer id) {
+	public ResponseEntity<?> delete(@PathVariable Integer id) throws Exception {
 		try {
-			return ResponseEntity.ok(categoryService.delete(id)) ;
-		}
-		catch (Exception e) {
+			return ResponseEntity.ok(categoryService.delete(id));
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
-	
+
 }

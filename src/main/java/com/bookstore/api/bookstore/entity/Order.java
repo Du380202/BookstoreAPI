@@ -39,7 +39,7 @@ public class Order {
 	@Column(name = "token")
 	private String token;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
 	private List<OrderDetail> orderDetails = new ArrayList<>();
 	@JsonIgnore

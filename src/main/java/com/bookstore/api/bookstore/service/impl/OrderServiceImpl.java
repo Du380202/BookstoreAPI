@@ -13,6 +13,7 @@ import com.bookstore.api.bookstore.entity.Order;
 import com.bookstore.api.bookstore.entity.User;
 import com.bookstore.api.bookstore.repository.OrderRepository;
 import com.bookstore.api.bookstore.repository.UserRepository;
+import com.bookstore.api.bookstore.service.BookService;
 import com.bookstore.api.bookstore.service.CartService;
 import com.bookstore.api.bookstore.service.OrderDetailService;
 import com.bookstore.api.bookstore.service.OrderService;
@@ -30,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private UserRepository userService;
+	
+	@Autowired
+	private BookService bookService;
 	
 	@Override
 	public List<Order> findAll() {
@@ -68,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
 			for (Cart cart : carts) {
 				totalPrice = totalPrice.add(cart.getTotalPrice());
 				cartService.deleteById(cart.getCartId());
+				bookService.updateQuantity(cart.getBook().getBookId(), cart.getQuantity());
 			}
 			order.setTotalPrice(totalPrice);
 			Order newOrder = orderRepository.save(order);

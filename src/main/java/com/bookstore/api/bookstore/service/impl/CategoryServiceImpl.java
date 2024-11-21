@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService{
 			categoryRepository.deleteById(id);
 			return "Xóa thành công";
 		} catch (Exception e) {
-			return e.getMessage();
+			throw new DataIntegrityViolationException("Vi pham rang buoc khoa ngoai");
 		}
 		
 		

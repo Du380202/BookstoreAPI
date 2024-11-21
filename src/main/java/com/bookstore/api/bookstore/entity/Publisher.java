@@ -3,6 +3,8 @@ package com.bookstore.api.bookstore.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,7 +39,7 @@ public class Publisher {
 	private String hotline;
 	@Column(name = "email")
 	private String email;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
 	private List<Book> books = new ArrayList<Book>();
 //	

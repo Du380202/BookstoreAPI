@@ -6,7 +6,7 @@ import com.bookstore.api.bookstore.dto.CartDto;
 import com.bookstore.api.bookstore.entity.Cart;
 
 public interface CartService {
-	public Cart addNewCart(Integer bookId, Integer userId) ;
+	public Cart addNewCart(Integer bookId, Integer userId) throws Exception ;
 	
 	public Cart findAllById(Integer bookId, Integer userId);
 	

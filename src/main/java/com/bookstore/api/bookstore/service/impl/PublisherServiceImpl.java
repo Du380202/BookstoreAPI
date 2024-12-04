@@ -33,7 +33,7 @@ public class PublisherServiceImpl implements PublisherService {
 		publisher.setAddress(publisherDto.getAddress());
 		publisher.setEmail(publisherDto.getEmail());
 		publisher.setHotline(publisherDto.getHotline());
-		publisher.setPublishname(publisherDto.getPublishname());
+		publisher.setPublisherName(publisherDto.getPublishname());
 		return publisherRepository.save(publisher);
 	}
 
@@ -43,7 +43,7 @@ public class PublisherServiceImpl implements PublisherService {
 		publisher.setAddress(publisherDto.getAddress());
 		publisher.setEmail(publisherDto.getEmail());
 		publisher.setHotline(publisherDto.getHotline());
-		publisher.setPublishname(publisherDto.getPublishname());
+		publisher.setPublisherName(publisherDto.getPublishname());
 		return publisherRepository.save(publisher);
 	}
 

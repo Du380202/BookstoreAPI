@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bookstore.api.bookstore.dto.CategoryDto;
 import com.bookstore.api.bookstore.entity.Category;
+import com.bookstore.api.bookstore.model.ApiResponse;
 import com.bookstore.api.bookstore.service.CategoryService;
 import com.bookstore.api.bookstore.service.UploadService;
 
@@ -45,19 +46,24 @@ public class CategoryController {
 	}
 
 	@PutMapping(value = "api/category")
-	public ResponseEntity<?> putData(@RequestPart("image") MultipartFile imgFile,
+	public ResponseEntity<?> putData(@RequestPart(value = "image", required = false) MultipartFile imgFile,
 			@RequestPart CategoryDto categoryDto) throws IOException {
-		String imageUrl = uploadService.uploadToCloudinary(imgFile, "category");
-		categoryDto.setCategoryImg(imageUrl);
+		String imageUrl = "";
+		if (imgFile != null && !imgFile.isEmpty()) {
+			imageUrl = uploadService.uploadToCloudinary(imgFile, "category");
+			categoryDto.setCategoryImg(imageUrl);
+		}
 		return ResponseEntity.ok(categoryService.update(categoryDto));
 	}
 
 	@DeleteMapping(value = "api/category/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) throws Exception {
 		try {
-			return ResponseEntity.ok(categoryService.delete(id));
+			return ResponseEntity.status(HttpStatus.OK).body(new 
+					ApiResponse(HttpStatus.OK.value(), categoryService.delete(id)));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new 
+					ApiResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
 		}
 	}
 

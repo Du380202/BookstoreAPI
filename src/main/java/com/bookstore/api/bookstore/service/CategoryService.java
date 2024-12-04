@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bookstore.api.bookstore.dto.CategoryDto;
 import com.bookstore.api.bookstore.entity.Category;
+import com.bookstore.api.bookstore.model.ApiResponse;
 
 public interface CategoryService {
 	public List<Category> findAll();

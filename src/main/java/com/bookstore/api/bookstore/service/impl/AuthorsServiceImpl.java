@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.bookstore.api.bookstore.code.MessageCode;
 import com.bookstore.api.bookstore.dto.AuthorDto;
 import com.bookstore.api.bookstore.entity.Author;
 import com.bookstore.api.bookstore.repository.AuthorRepository;
 import com.bookstore.api.bookstore.service.AuthorService;
+import com.bookstore.api.bookstore.service.ReadMessageService;
 @Service
 public class AuthorsServiceImpl implements AuthorService {
-
 	@Autowired
 	private AuthorRepository authorRepository;
 	@Override
@@ -34,6 +35,7 @@ public class AuthorsServiceImpl implements AuthorService {
 		Author author = authorRepository.findById(authorDto.getAuthorId()).get();
 		author.setAuthorName(authorDto.getAuthorName());
 		author.setBiography(authorDto.getBiography());
+		
 		author.setAuthorImg(authorDto.getAuthorImg());
 		return authorRepository.save(author);
 	}
@@ -42,9 +44,9 @@ public class AuthorsServiceImpl implements AuthorService {
 	public String deleteAuthor(Integer ids) throws Exception {
 		try {
 			authorRepository.deleteById(ids);
-			return "Xóa thành công";
+			return ReadMessageService.KeyValueStore.get(MessageCode.SUCCESS_MESSAGE);
 		} catch (Exception e) {
-			throw new DataIntegrityViolationException("Vi pham rang buoc khoa ngoai");
+			throw new DataIntegrityViolationException(ReadMessageService.KeyValueStore.get(MessageCode.FOREIGN_KEY_EXCEPTION));
 		}
 		
 	}

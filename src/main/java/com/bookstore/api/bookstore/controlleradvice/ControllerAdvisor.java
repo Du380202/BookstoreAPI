@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.bookstore.api.bookstore.custom.InvalidException;
 import com.bookstore.api.bookstore.dto.ErrorDepscriptionDetail;
+import com.bookstore.api.bookstore.model.ApiResponse;
 
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
@@ -52,5 +53,15 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         error.setDetails(details);
         
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> handleException(Exception ex) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setStatus(400);
+        apiResponse.setMessage(ex.getMessage());
+//        apiResponse.setData(null);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 }

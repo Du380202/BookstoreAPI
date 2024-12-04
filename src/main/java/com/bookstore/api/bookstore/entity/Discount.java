@@ -29,6 +29,8 @@ public class Discount {
 	private Integer status;
 	@Column(name = "startdate")
 	private LocalDate startDate;
+	@Column(name = "discountpercent")
+	private Integer discountPercent;
 	@Column(name="enddate")
 	private LocalDate endDate;
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -48,6 +50,12 @@ public class Discount {
 	}
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+	public Integer getDiscountPercent() {
+		return discountPercent;
+	}
+	public void setDiscountPercent(Integer discountpercent) {
+		this.discountPercent = discountpercent;
 	}
 	public List<Book> getBooks() {
 		return books;

@@ -32,7 +32,7 @@ public class Publisher {
 	private Integer publisherId;
 	
 	@Column(name = "publishername")
-	private String publishname;
+	private String publisherName;
 	@Column(name = "address")
 	private String address;
 	@Column(name = "hotline")
@@ -55,11 +55,15 @@ public class Publisher {
 	public void setPublisherId(Integer publisherId) {
 		this.publisherId = publisherId;
 	}
-	public String getPublishname() {
-		return publishname;
+	
+	public String getPublisherName() {
+		return publisherName;
 	}
-	public void setPublishname(String publishname) {
-		this.publishname = publishname;
+	public void setPublisherName(String publisherName) {
+		this.publisherName = publisherName;
+	}
+	public List<Book> getBooks() {
+		return books;
 	}
 	public String getAddress() {
 		return address;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.bookstore.api.bookstore.code.MessageCode;
 import com.bookstore.api.bookstore.dto.CartDto;
 import com.bookstore.api.bookstore.entity.Book;
 import com.bookstore.api.bookstore.entity.Cart;
@@ -16,6 +17,7 @@ import com.bookstore.api.bookstore.repository.BookRepository;
 import com.bookstore.api.bookstore.repository.CartRepository;
 import com.bookstore.api.bookstore.repository.UserRepository;
 import com.bookstore.api.bookstore.service.CartService;
+import com.bookstore.api.bookstore.service.ReadMessageService;
 @Service
 public class CartServiceImpl implements CartService {
 	@Autowired
@@ -35,11 +37,17 @@ public class CartServiceImpl implements CartService {
 			int quantity = cart.getQuantity() + 1;
 			if(quantity <= book.getQuantity()) {
 				cart.setQuantity(quantity);
-				BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(quantity));
-				cart.setTotalPrice(totalPrice);
+				if (book.getDiscountedPrice().compareTo(BigDecimal.valueOf(0)) == 1)  {
+					BigDecimal totalPrice = book.getDiscountedPrice().multiply(BigDecimal.valueOf(quantity));
+					cart.setTotalPrice(totalPrice);
+				}else {
+					BigDecimal totalPrice = book.getPrice().multiply(BigDecimal.valueOf(quantity));
+					cart.setTotalPrice(totalPrice);
+				}
+				
 			}
 			else {
-				throw new DataIntegrityViolationException("Quantity is limited");
+				throw new DataIntegrityViolationException(ReadMessageService.KeyValueStore.get(MessageCode.QUANTITY_LIMIT));
 			}
 			
 			
@@ -47,7 +55,12 @@ public class CartServiceImpl implements CartService {
 		else {
 			cart = new Cart();
 			cart.setQuantity(1);
-			cart.setTotalPrice(book.getPrice());
+			if (book.getDiscountedPrice().compareTo(BigDecimal.valueOf(0)) == 1) {
+				cart.setTotalPrice(book.getDiscountedPrice());
+			} else {
+				cart.setTotalPrice(book.getPrice());
+			}
+			
 			cart.setBook(book);
 			cart.setUser(user);
 		}

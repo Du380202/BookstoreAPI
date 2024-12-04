@@ -23,10 +23,10 @@ public class Rate {
 	@Column(name = "comment")
 	private String comment;
 	@Column(name = "start")
-	private Integer start;
+	private Float start;
 	@Column(name = "date")
 	private LocalDate date;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "userid")
     private User user;
@@ -46,10 +46,10 @@ public class Rate {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Integer getStart() {
+	public Float getStart() {
 		return start;
 	}
-	public void setStart(Integer start) {
+	public void setStart(Float start) {
 		this.start = start;
 	}
 	public LocalDate getDate() {

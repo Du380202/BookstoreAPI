@@ -35,7 +35,8 @@ public class User {
 	private String fullName;
 	@Column(name = "status")
 	private Integer status;
-	
+	@Column(name = "avatar")
+	private String avatar;
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -56,11 +57,33 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Order> order = new ArrayList<>();
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "roleid")
     private Role role;
 	
-//	public List<Address> getAddressList() {
+public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public List<Order> getOrder() {
+		return order;
+	}
+	public void setOrder(List<Order> order) {
+		this.order = order;
+	}
+	public List<Address> getAddressList() {
+		return addressList;
+	}
+	public List<Rate> getRates() {
+		return rates;
+	}
+	public List<Cart> getCart() {
+		return cart;
+	}
+	//	public List<Address> getAddressList() {
 //		return addressList;
 //	}
 	public void setAddressList(List<Address> addressList) {

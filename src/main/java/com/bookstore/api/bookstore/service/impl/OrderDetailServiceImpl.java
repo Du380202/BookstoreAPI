@@ -26,7 +26,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			orderDetail.setTotalPrice(cart.getTotalPrice());
 			orderDetailRepository.save(orderDetail);
 		}
-		return false;
+		return true;
+	}
+
+	@Override
+	public List<OrderDetail> getOrderDetail(Integer orderId) {
+		return orderDetailRepository.findAllByOrder_OrderId(orderId);
 	}
 
 }

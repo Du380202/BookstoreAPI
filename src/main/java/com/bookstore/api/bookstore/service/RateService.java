@@ -9,5 +9,7 @@ public interface RateService {
 	public Rate createRate(RateDto rateDto);
 	
 	public List<Rate> getRateByBookId(Integer bookId);
+	
+	
 
 }

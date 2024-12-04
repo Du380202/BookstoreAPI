@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class RateDto {
 	private Integer rateId;
 	private String comment;
-	private Integer start;
+	private Float start;
 	private LocalDate date;
 	private Integer userId;
 	private Integer bookId;
@@ -21,10 +21,10 @@ public class RateDto {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Integer getStart() {
+	public Float getStart() {
 		return start;
 	}
-	public void setStart(Integer start) {
+	public void setStart(Float start) {
 		this.start = start;
 	}
 	public LocalDate getDate() {

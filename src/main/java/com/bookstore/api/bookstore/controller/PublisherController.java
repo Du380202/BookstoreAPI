@@ -3,6 +3,7 @@ package com.bookstore.api.bookstore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class PublisherController {
 	private PublisherService publisherService;
 
 	@GetMapping(value = "api/publisher")
-	public List<Publisher> getPublisher() {
-		return publisherService.findAll();
+	public ResponseEntity<?> getPublisher() {
+		return ResponseEntity.ok(publisherService.findAll());
 	}
 	
 	@PostMapping(value = "api/publisher")

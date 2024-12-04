@@ -7,6 +7,8 @@ import com.bookstore.api.bookstore.entity.Book;
 
 public interface BookService {
 	public List<Book> findAll();
+	
+	public Book findById(Integer bookId);
 
 	public Book createNewBook(BookDto bookDto);
 	
@@ -17,4 +19,8 @@ public interface BookService {
 	public void updateQuantity(Integer bookId,Integer quantity);
 	
 	public List<Book> searchBook(String key);
+	
+	public List<Book> getBookByCategoryId(Integer categoryId);
+	
+	public List<Book> findAllByIds(List<Integer> bookIds);
 }

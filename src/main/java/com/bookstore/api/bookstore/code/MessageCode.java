@@ -1,0 +1,16 @@
+package com.bookstore.api.bookstore.code;
+
+public enum MessageCode {
+	ERROR_MESSAGE,
+    SUCCESS_MESSAGE,
+    CONNECTION_TIMEOUT,
+    FOREIGN_KEY_EXCEPTION,
+    QUANTITY_LIMIT,
+    NOT_FOUND,
+    CART_EMPTY,
+    CONNECTION_ERROR,
+    SUCCESS_ORDER,
+    ERROR_ORDER,
+    POST_SUCCESS,
+    CANCEL_SUCCESS_ORDER;
+}

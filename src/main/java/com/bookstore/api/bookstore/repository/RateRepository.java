@@ -13,4 +13,5 @@ import com.bookstore.api.bookstore.entity.Rate;
 public interface RateRepository extends JpaRepository<Rate, Integer> {
 	@Query("SELECT r FROM Rate r WHERE r.book.bookId = :bookId")
     List<Rate> findAllRateByBook(@Param("bookId") Integer bookId);
+//	List<Rate> findAllByBook_BookId(Integer bookId);
 }

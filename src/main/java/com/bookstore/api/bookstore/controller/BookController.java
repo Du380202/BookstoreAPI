@@ -21,6 +21,7 @@ import com.bookstore.api.bookstore.dto.BookDto;
 import com.bookstore.api.bookstore.dto.CategoryDto;
 import com.bookstore.api.bookstore.entity.Book;
 import com.bookstore.api.bookstore.entity.Publisher;
+import com.bookstore.api.bookstore.model.ApiResponse;
 import com.bookstore.api.bookstore.service.BookService;
 import com.bookstore.api.bookstore.service.PublisherService;
 import com.bookstore.api.bookstore.service.UploadService;
@@ -36,7 +37,18 @@ public class BookController {
 	@GetMapping(value = "/api/book")
 	public List<Book> getBooks() {
 		List<Book> result = bookService.findAll();
-		System.out.println(result.size());
+		return result;
+	}
+	
+	@GetMapping(value = "/api/bookId")
+	public Book getBooks(@RequestParam Integer bookId) {
+		Book result = bookService.findById(bookId);
+		return result;
+	}
+	
+	@GetMapping(value = "/api/book/category")
+	public List<Book> getBookByCategory(@RequestParam Integer categoryId) {
+		List<Book> result = bookService.getBookByCategoryId(categoryId);
 		return result;
 	}
 	
@@ -54,19 +66,25 @@ public class BookController {
 	
 	
 	@PutMapping(value = "/api/book")
-	public ResponseEntity<?> updateBook(@RequestPart("image") MultipartFile imgFile, @RequestPart BookDto bookDto) throws IOException {
-		String imageUrl = uploadService.uploadToCloudinary(imgFile, "book");
-		bookDto.setImage(imageUrl);
+	public ResponseEntity<?> updateBook(@RequestPart(value = "image", required = false) MultipartFile imgFile, @RequestPart BookDto bookDto) throws IOException {
+		String imageUrl = "";
+		if (imgFile != null && !imgFile.isEmpty()) {
+			imageUrl = uploadService.uploadToCloudinary(imgFile, "book");
+			bookDto.setImage(imageUrl);
+		}
+		
+		System.out.print(imageUrl);
 		return ResponseEntity.ok(bookService.updateBook(bookDto));
 	}
 
 	@DeleteMapping(value = "/api/book/{ids}")
 	public ResponseEntity<?> deleteBook(@PathVariable Integer ids)  throws Exception {
 		try {
-			return ResponseEntity.ok(bookService.delete(ids)) ;
-		}
-		catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.OK).body(new 
+					ApiResponse(HttpStatus.OK.value(), bookService.delete(ids)));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new 
+					ApiResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
 		}
 		
 	}

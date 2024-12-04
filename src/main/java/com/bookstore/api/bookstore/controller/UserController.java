@@ -23,6 +23,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping(value = "api/user")
+	public ResponseEntity<?> getAllUser() {
+		return ResponseEntity.ok( userService.findAll());
+	}
+	
 	@PostMapping(value="api/register")
 	public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws IOException {
 		try {

@@ -17,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -44,9 +45,13 @@ public class Book {
     @Column(name = "price")
     private BigDecimal price;
     
+    @Column(name = "discountedprice ")
+    private BigDecimal discountedPrice ;
+    
     @Column(name = "image")
     private String image;
-    @Column(name = "description")
+    @Lob
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "quantity")
@@ -116,6 +121,14 @@ public class Book {
 
 	public void setCart(List<Cart> cart) {
 		this.cart = cart;
+	}
+
+	public BigDecimal getDiscountedPrice() {
+		return discountedPrice;
+	}
+
+	public void setDiscountedPrice(BigDecimal discountedPrice) {
+		this.discountedPrice = discountedPrice;
 	}
 
 	public List<Discount> getDiscounts() {

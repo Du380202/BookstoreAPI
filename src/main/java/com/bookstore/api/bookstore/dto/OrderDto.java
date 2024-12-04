@@ -13,6 +13,14 @@ public class OrderDto {
 	private Integer status;
 	private String token;
 	private Integer userId;
+	private String phoneNumber;
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

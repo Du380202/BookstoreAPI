@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookstore.api.bookstore.code.MessageCode;
 import com.bookstore.api.bookstore.dto.CartDto;
 import com.bookstore.api.bookstore.entity.Cart;
+import com.bookstore.api.bookstore.model.ApiResponse;
 import com.bookstore.api.bookstore.service.CartService;
+import com.bookstore.api.bookstore.service.ReadMessageService;
 
 @RestController
 public class CartController {
 	@Autowired
 	private CartService cartService;
+	
 	
 	@GetMapping(value = "api/cart")
 	public List<Cart> getCartByUser(@RequestParam("userId") Integer userId) {
@@ -32,7 +36,8 @@ public class CartController {
 			return ResponseEntity.ok(cartService.addNewCart(bookId, userId)) ;
 		}
 		catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new 
+					ApiResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
 		}
 	}
 	

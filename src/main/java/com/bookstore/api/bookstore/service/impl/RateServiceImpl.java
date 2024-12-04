@@ -29,6 +29,7 @@ public class RateServiceImpl implements RateService {
 		Rate rate = new Rate();
 		User user = userRepository.findById(rateDto.getUserId()).get();
 		Book book = bookRepository.findById(rateDto.getBookId()).get();
+		book.setRating(null);
 		rate.setDate(rateDto.getDate());
 		rate.setComment(rateDto.getComment());
 		rate.setStart(rateDto.getStart());

@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bookstore.api.bookstore.code.MessageCode;
 import com.bookstore.api.bookstore.dto.DiscountDto;
 import com.bookstore.api.bookstore.entity.Book;
 import com.bookstore.api.bookstore.entity.Discount;
 import com.bookstore.api.bookstore.repository.DiscountRepository;
 import com.bookstore.api.bookstore.service.BookService;
 import com.bookstore.api.bookstore.service.DiscountService;
+import com.bookstore.api.bookstore.service.ReadMessageService;
 @Service
 public class DiscountServiceImpl implements DiscountService{
 	@Autowired
@@ -37,6 +39,14 @@ public class DiscountServiceImpl implements DiscountService{
 	public List<Discount> findAll() {
 		// TODO Auto-generated method stub
 		return discountRepository.findAll();
+	}
+
+	@Override
+	public String cancelDiscount(Integer discountId) {
+		Discount discount = discountRepository.findById(discountId).get();
+		discount.setStatus(0);
+		discountRepository.save(discount);
+		return ReadMessageService.KeyValueStore.get(MessageCode.SUCCESS_MESSAGE);
 	}
 
 }

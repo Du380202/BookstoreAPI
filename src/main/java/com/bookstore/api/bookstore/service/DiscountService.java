@@ -10,4 +10,6 @@ public interface DiscountService {
 	
 	public List<Discount> findAll();
 	
+	public String cancelDiscount(Integer discountId);
+	
 }
